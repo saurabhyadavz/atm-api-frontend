@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const baseUrl="http://localhost:8080"
+const baseUrl="http://localhost:8080";
+
 export async function fetchUserDetailsApi (accountNumber){
     try{
         let response= await axios.get(`${baseUrl}/checkBalance?accountNumber=${accountNumber}`)

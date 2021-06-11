@@ -12,13 +12,14 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 import Profile from "./Profile";
 import Transaction from "./Transaction";
+import Home from "./Home";
 
 function Header(){
     return(
         <div >
 
                 <Navbar color="light" light expand="md" style={{textContent:'100px'}}>
-                    <NavbarBrand style={{color:'blue', paddingLeft:'30px',fontWeight:"bold",fontSize:"25px"}}>ATM </NavbarBrand>
+                    <NavbarBrand style={{color:'blue', paddingLeft:'30px',fontWeight:"bold",fontSize:"25px"}} href="/" >ATM </NavbarBrand>
 
                     <Nav className="mr-auto"  navbar style={{fontSize:"20px"}}>
                         <NavItem>
@@ -46,6 +47,9 @@ function Header(){
 
             <Router>
                 <Switch>
+                    <Route exact path="/">
+                        <Home />
+                    </Route>
                     <Route exact path="/profile">
                         <Profile />
                     </Route>
