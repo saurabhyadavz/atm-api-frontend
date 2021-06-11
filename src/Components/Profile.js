@@ -1,7 +1,6 @@
 import React from "react"
-import axios from 'axios';
 import {Row, Card, Col, CardTitle} from "reactstrap";
-
+import {fetchUserDetailsApi} from "./Utils.js";
 
 class Profile extends React.Component{
     constructor() {
@@ -13,24 +12,19 @@ class Profile extends React.Component{
 
     }
 
-     componentDidMount() {
-        this.handleUserinfo()
+    componentDidMount() {
+        fetchUserDetailsApi(this.state.accountNumber).then((data) =>{
+                if(data){
+                    console.log(data)
+                    this.setState({balance:data.data.balance})
+                }
+                else{
+                    alert("Somethings Wrong")
+                }
 
+            }
+        );
     }
-
-    handleUserinfo =() =>{
-        var self = this;
-        axios.get('http://localhost:8080/details?accountNumber=102')
-            .then(function (response) {
-                self.setState({balance:response.data.balance})
-                console.log(response);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    }
-
-
 
 
 
@@ -43,7 +37,7 @@ class Profile extends React.Component{
                     <Col sm="3">
                         <Card body>
                             <CardTitle tag="h3">Account Number:{this.state.accountNumber}</CardTitle>
-                            <CardTitle tag="h3">Balance:{this.state.balance}</CardTitle>
+                            <CardTitle tag="h3">Balance: {this.state.balance}</CardTitle>
                         </Card>
                     </Col>
 

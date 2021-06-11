@@ -1,8 +1,7 @@
 import React from "react";
 import {Button, Card, CardTitle, Col, Row} from "reactstrap";
-import axios from "axios";
 import {toast} from "react-toastify";
-
+import {transactionApi} from "./Utils";
 
 class Transaction extends React.Component{
     constructor() {
@@ -23,38 +22,23 @@ class Transaction extends React.Component{
     handleClick(e){
 
         e.preventDefault();
-        var body=JSON.stringify({
-            accountNumber:this.state.accountNumber,
-            balance:this.state.balance
-        });
+        transactionApi(this.state.accountNumber,this.state.balance,this.state.pathName).then((data) =>{
+            console.log(data)
+            if(data.data==="Success"){
+                toast.success("Transaction successful");
+                console.log(data);
+            }
+            else{
+                toast.error("Transaction Failed");
+                console.log(data);
+            }
+            this.setState({balance:''})
+        })
 
-
-        const config = { headers: {'Content-Type': 'application/json'} };
-        const path=this.state.pathName
-
-        axios.put(  `http://localhost:8080${path}`,body,config)
-            .then(function (response) {
-                if(response.data==="Success")
-                {
-                    toast.success("Transaction successful");
-                    console.log(response);
-                }
-                else{
-                    toast.error("Transaction Failed");
-
-                    console.log(response);
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-
-        this.handleChange({ balance: '' })
 
     }
 
      urlChange(str) {
-
         const  s = str.substring(1)
         const capitalized = s.charAt(0).toUpperCase() + s.slice(1);
         return capitalized;
