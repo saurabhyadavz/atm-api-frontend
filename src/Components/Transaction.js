@@ -1,7 +1,8 @@
 import React from "react";
 import {Button, Card, CardTitle, Col, Row} from "reactstrap";
 import axios from "axios";
-import {message} from "antd";
+import {toast} from "react-toastify";
+
 
 class Transaction extends React.Component{
     constructor() {
@@ -35,11 +36,12 @@ class Transaction extends React.Component{
             .then(function (response) {
                 if(response.data==="Success")
                 {
-                    message.success("Transaction Successfull ");
+                    toast.success("Transaction successful");
                     console.log(response);
                 }
                 else{
-                    message.error("Transaction failed ");
+                    toast.error("Transaction Failed");
+
                     console.log(response);
                 }
             })
@@ -51,20 +53,19 @@ class Transaction extends React.Component{
 
     }
 
+     urlChange(str) {
 
+        const  s = str.substring(1)
+        const capitalized = s.charAt(0).toUpperCase() + s.slice(1);
+        return capitalized;
+    }
 
 
     render() {
 
-       function urlChange(str) {
 
-            const  s = str.substring(1)
-            const capitalized = s.charAt(0).toUpperCase() + s.slice(1);
-
-            return capitalized;
-        }
         const string = this.state.pathName
-        const url = urlChange(string)
+        const url = this.urlChange(string)
 
         return(
 

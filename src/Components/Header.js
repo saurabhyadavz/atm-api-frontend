@@ -18,11 +18,11 @@ function Header(){
         <div >
 
                 <Navbar color="light" light expand="md" style={{textContent:'100px'}}>
-                    <NavbarBrand style={{color:'blue', paddingLeft:'30px'}}>ATM </NavbarBrand>
+                    <NavbarBrand style={{color:'blue', paddingLeft:'30px',fontWeight:"bold",fontSize:"25px"}}>ATM </NavbarBrand>
 
-                    <Nav className="mr-auto" navbar>
+                    <Nav className="mr-auto"  navbar style={{fontSize:"20px"}}>
                         <NavItem>
-                            <NavLink  href="/profile">Profile</NavLink>
+                            <NavLink  href="/profile" >Profile</NavLink>
                         </NavItem>
 
                         <UncontrolledDropdown nav inNavbar>
@@ -43,6 +43,7 @@ function Header(){
 
                     </Nav>
                 </Navbar>
+
             <Router>
                 <Switch>
                     <Route exact path="/profile">
@@ -54,8 +55,6 @@ function Header(){
                     <Route exact path="/deposit">
                         <Transaction />
                     </Route>
-
-
                 </Switch>
 
             </Router>

@@ -1,6 +1,7 @@
 import React from "react"
-import './App.css';
 import Header from './Components/Header'
+import {ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -10,6 +11,7 @@ class App extends React.Component{
     {
         return (
             <div >
+                <ToastContainer />
                 <Header />
             </div>
 
