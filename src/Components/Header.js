@@ -17,8 +17,8 @@ import Profile from "./Profile";
 function Header(){
     return(
         <div >
-            <Router>
-                <Navbar color="light" light expand="md">
+
+                <Navbar color="light" light expand="md" style={{textContent:'100px'}}>
                     <NavbarBrand style={{color:'blue', paddingLeft:'30px'}}>ATM </NavbarBrand>
 
                     <Nav className="mr-auto" navbar>
@@ -35,6 +35,7 @@ function Header(){
 
                     </Nav>
                 </Navbar>
+            <Router>
                 <Switch>
                     <Route exact path="/profile">
                         <Profile />
