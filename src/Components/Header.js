@@ -4,15 +4,14 @@ import {
     NavbarBrand,
     Nav,
     NavItem,
-    NavLink
+    NavLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem
 
 } from 'reactstrap';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import Withdraw from "./Withdraw";
-import Deposit from "./Deposit";
 
 
 import Profile from "./Profile";
+import Transaction from "./Transaction";
 
 function Header(){
     return(
@@ -25,12 +24,21 @@ function Header(){
                         <NavItem>
                             <NavLink  href="/profile">Profile</NavLink>
                         </NavItem>
-                        <NavItem>
-                            <NavLink href="/withdraw">Withdraw</NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink  href="/deposit">Deposit</NavLink>
-                        </NavItem>
+
+                        <UncontrolledDropdown nav inNavbar>
+                            <DropdownToggle nav caret>
+                                Transaction
+                            </DropdownToggle>
+                            <DropdownMenu right >
+                                <DropdownItem href="/deposit">
+                                    Deposit
+                                </DropdownItem >
+                                <DropdownItem href="/withdraw">
+                                    Withdraw
+                                </DropdownItem>
+
+                            </DropdownMenu>
+                        </UncontrolledDropdown>
 
 
                     </Nav>
@@ -41,10 +49,10 @@ function Header(){
                         <Profile />
                     </Route>
                     <Route exact path="/withdraw">
-                        <Withdraw />
+                        <Transaction />
                     </Route>
                     <Route exact path="/deposit">
-                        <Deposit />
+                        <Transaction />
                     </Route>
 
 
