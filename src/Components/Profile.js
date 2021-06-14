@@ -1,13 +1,16 @@
 import React from "react"
-import {Row, Card, Col, CardTitle} from "reactstrap";
 import {fetchUserDetailsApi} from "./Utils.js";
+import Container from "@material-ui/core/Container";
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
 
 class Profile extends React.Component{
     constructor() {
         super();
         this.state={
-            accountNumber:"102",
-            balance:''
+            accountNumber:"919554630599",
+            balance:'',
+
         }
 
     }
@@ -32,18 +35,32 @@ class Profile extends React.Component{
     {
 
         return (
-            <div>
-                <Row style={{paddingTop: '50px',paddingLeft:'50px'}} >
-                    <Col sm="3">
-                        <Card body>
-                            <CardTitle tag="h3">Account Number:{this.state.accountNumber}</CardTitle>
-                            <CardTitle tag="h3">Balance: {this.state.balance}</CardTitle>
-                        </Card>
-                    </Col>
 
-                </Row>
+            <Container style={{paddingTop:40}}>
 
-            </div>
+                <Grid container spacing={4} justify="center" >
+                    <Grid item xs >
+                        <Paper style={{height:200,width:400,textAlign:'center',paddingTop:'50px',background:'#f8f8f8'}}  >
+                            <text style={{fontSize:"30px",fontFamily:'Monospace',color:'#090809'}}>Account Number</text>
+                            <br/>
+                            <text style={{fontSize:"30px",fontFamily:'Monospace' ,color:'#090809'}}>{this.state.accountNumber}</text>
+
+                        </Paper>
+
+                    </Grid>
+                    <Grid item xs>
+                        <Paper style={{height:200,width:400,textAlign:'center',paddingTop:'50px',background:'#f8f8f8'}}  >
+                            <text style={{fontSize:"30px",fontFamily:'Monospace',color:'#090809'}}>Total Balance</text>
+                            <br/>
+                            <text style={{fontSize:"30px",fontFamily:'Monospace',color:'#090809'}}>₹ {this.state.balance}</text>
+
+                        </Paper>
+                    </Grid>
+
+
+                </Grid>
+
+            </Container>
 
         );
     }

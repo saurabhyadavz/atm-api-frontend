@@ -1,15 +1,23 @@
 import React from "react";
-import {Button, Card, CardTitle, Col, Row} from "reactstrap";
-import {toast} from "react-toastify";
+
+import {toast, ToastContainer} from "react-toastify";
 import {transactionApi} from "./Utils";
+import 'react-toastify/dist/ReactToastify.css';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import Container from '@material-ui/core/Container';
+import Button from '@material-ui/core/Button';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 class Transaction extends React.Component{
     constructor() {
         super();
         this.state={
-            accountNumber:"102",
+            accountNumber:"919554630599",
             balance:'',
-            pathName:window.location.pathname
+            mode:'Withdraw'
         }
         this.handleChange=this.handleChange.bind(this)
         this.handleClick=this.handleClick.bind(this)
@@ -21,8 +29,9 @@ class Transaction extends React.Component{
 
     handleClick(e){
 
-        e.preventDefault();
-        transactionApi(this.state.accountNumber,this.state.balance,this.state.pathName).then((data) =>{
+        var mode=(this.state.mode==='Deposit'?'deposit':'withdraw');
+
+        transactionApi(this.state.accountNumber,this.state.balance,mode).then((data) =>{
             console.log(data)
             if(data.data==="Success"){
                 toast.success("Transaction successful");
@@ -35,38 +44,50 @@ class Transaction extends React.Component{
             this.setState({balance:''})
         })
 
+        this.setState({mode:!this.state.mode})
 
     }
 
-     urlChange(str) {
-        const  s = str.substring(1)
-        const capitalized = s.charAt(0).toUpperCase() + s.slice(1);
-        return capitalized;
-    }
 
 
     render() {
 
 
-        const string = this.state.pathName
-        const url = this.urlChange(string)
 
         return(
-
             <div>
-                <Row style={{paddingTop: '50px',paddingLeft:'50px'}} >
-                    <Col sm="3">
-                        <Card body>
-                            <CardTitle tag="h5">{url} Money</CardTitle>
-                            <input type="text" value={this.state.balance}
-                                   onChange={(e) => this.handleChange({ balance: e.target.value })} />
-                            <Button style={{color:"white",background:"blue"}} onClick={this.handleClick}>{url}</Button>
-                        </Card>
+                <ToastContainer/>
+                <Container style={{paddingTop:40}}>
+
+                    <Grid container justify="center" >
+                        <Grid item >
+                            <Paper style={{height:300,width:500,paddingTop:'30px',background:'#f8f8f8'}}  >
+                                <text style={{fontSize:"30px",margin:'80px',fontFamily:'Monospace',color:'#090809'}}>Money Transaction</text>
+                                <br/>
+                                <RadioGroup style={{paddingLeft:'100px', paddingTop:'10px'}} aria-label="mode"  value={this.state.mode}
+                                            onChange={(e) => this.handleChange({ mode: e.target.value })}>
+                                    <FormControlLabel value="Withdraw" control={<Radio />} label="Withdraw" />
+                                    <FormControlLabel value="Deposit" control={<Radio />} label="Deposit" />
+
+                                </RadioGroup>
+                                <input  style={{marginTop:"20px",marginLeft:'90px',paddingLeft:'20px',width: "60%"}} type="text" value={this.state.balance}
+                                        onChange={(e) => this.handleChange({ balance: e.target.value })} />
+                                <br/>
+                                <Button  style={{marginTop:"20px",marginLeft:'160px',width:"30%"}} variant="contained" onClick={this.handleClick}>Submit</Button>
+                            </Paper>
+
+                        </Grid>
 
 
-                    </Col>
-                </Row>
+
+                    </Grid>
+
+                </Container>
             </div>
+
+
+
+
         );
     }
 }

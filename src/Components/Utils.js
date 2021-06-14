@@ -23,6 +23,6 @@ export async function transactionApi (accountNumber,amount,path){
 
     const config = { headers: {'Content-Type': 'application/json'} };
 
-    let response=await axios.put(  `${baseUrl}${path}`,body,config)
+    let response=await axios.put(  `${baseUrl}/${path}`,body,config)
      return response
 }
