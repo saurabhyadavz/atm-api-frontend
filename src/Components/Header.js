@@ -1,30 +1,27 @@
 import React from "react";
-import {
-    Navbar,
-    NavbarBrand,
-    Nav,
-    NavItem,
-    NavLink
-
-} from 'reactstrap';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import Button from 'react-bootstrap/Button';
 
 
 function Header(){
+    const handleClick=(e)=>{
+        window.localStorage.removeItem('logged')
+        window.location='/'
+    }
     return(
         <div >
 
-                <Navbar color="light" light expand="md" style={{textContent:'100px'}}>
-                    <NavbarBrand style={{marginLeft:'10px',fontFamily:'sans-serif'}} href="/">ATM</NavbarBrand>
-
-                    <Nav className="mr-auto"  navbar style={{fontSize:"20px"}}>
-                        <NavItem>
-                            <NavLink  href="/profile" >Profile</NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink  href="/transaction" >Transaction</NavLink>
-                        </NavItem>
+            <Navbar bg="primary" variant="dark">
+                    <Navbar.Brand style={{marginLeft:'10px',fontFamily:'sans-serif'}} >ATM</Navbar.Brand>
+                    <Nav className="mr-auto">
+                            <Nav.Link  href="/profile" >Profile</Nav.Link>
+                            <Nav.Link  href="/transaction" >Transaction</Nav.Link>
 
                     </Nav>
+
+                    <Button variant="light" onClick={handleClick}>Logout</Button>
+
                 </Navbar>
 
         </div>

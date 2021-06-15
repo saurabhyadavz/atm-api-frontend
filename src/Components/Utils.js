@@ -26,3 +26,17 @@ export async function transactionApi (accountNumber,amount,path){
     let response=await axios.put(  `${baseUrl}/${path}`,body,config)
      return response
 }
+
+export async function signInAuth(email,pass){
+
+    try{
+        let response= await axios.get(`${baseUrl}/signIn?email=${email}`)
+        console.log(response);
+        return response;
+    }
+    catch(error) {
+        console.log(error);
+        return error;
+    }
+
+}

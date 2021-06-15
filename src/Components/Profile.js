@@ -33,34 +33,38 @@ class Profile extends React.Component{
 
     render()
     {
+        let page=<Container style={{paddingTop:40}}>
 
-        return (
+            <Grid container spacing={4} justify="center" >
+                <Grid item xs >
+                    <Paper style={{height:200,width:400,textAlign:'center',paddingTop:'50px',background:'#f8f8f8'}}  >
+                        <text style={{fontSize:"30px",fontFamily:'Monospace',color:'#090809'}}>Account Number</text>
+                        <br/>
+                        <text style={{fontSize:"30px",fontFamily:'Monospace' ,color:'#090809'}}>{this.state.accountNumber}</text>
 
-            <Container style={{paddingTop:40}}>
-
-                <Grid container spacing={4} justify="center" >
-                    <Grid item xs >
-                        <Paper style={{height:200,width:400,textAlign:'center',paddingTop:'50px',background:'#f8f8f8'}}  >
-                            <text style={{fontSize:"30px",fontFamily:'Monospace',color:'#090809'}}>Account Number</text>
-                            <br/>
-                            <text style={{fontSize:"30px",fontFamily:'Monospace' ,color:'#090809'}}>{this.state.accountNumber}</text>
-
-                        </Paper>
-
-                    </Grid>
-                    <Grid item xs>
-                        <Paper style={{height:200,width:400,textAlign:'center',paddingTop:'50px',background:'#f8f8f8'}}  >
-                            <text style={{fontSize:"30px",fontFamily:'Monospace',color:'#090809'}}>Total Balance</text>
-                            <br/>
-                            <text style={{fontSize:"30px",fontFamily:'Monospace',color:'#090809'}}>₹ {this.state.balance}</text>
-
-                        </Paper>
-                    </Grid>
-
+                    </Paper>
 
                 </Grid>
+                <Grid item xs>
+                    <Paper style={{height:200,width:400,textAlign:'center',paddingTop:'50px',background:'#f8f8f8'}}  >
+                        <text style={{fontSize:"30px",fontFamily:'Monospace',color:'#090809'}}>Total Balance</text>
+                        <br/>
+                        <text style={{fontSize:"30px",fontFamily:'Monospace',color:'#090809'}}>₹ {this.state.balance}</text>
 
-            </Container>
+                    </Paper>
+                </Grid>
+
+
+            </Grid>
+
+        </Container>;
+
+
+        return (
+            <div>
+                {page}
+            </div>
+
 
         );
     }
