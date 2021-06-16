@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 
 function Header(){
     const handleClick=(e)=>{
-        window.localStorage.removeItem('logged')
+        window.localStorage.clear()
         window.location='/'
     }
     return(
@@ -17,6 +17,8 @@ function Header(){
                     <Nav className="mr-auto">
                             <Nav.Link  href="/profile" >Profile</Nav.Link>
                             <Nav.Link  href="/transaction" >Transaction</Nav.Link>
+                            <Nav.Link  href="/transfer" >Money Transfer</Nav.Link>
+                             <Nav.Link  href="/transactionDetails" >Transaction Details</Nav.Link>
 
                     </Nav>
 

@@ -8,7 +8,7 @@ class Profile extends React.Component{
     constructor() {
         super();
         this.state={
-            accountNumber:"919554630599",
+            accountNumber:window.localStorage.getItem('accountNumber'),
             balance:'',
 
         }
@@ -16,17 +16,12 @@ class Profile extends React.Component{
     }
 
     componentDidMount() {
-        fetchUserDetailsApi(this.state.accountNumber).then((data) =>{
-                if(data){
-                    console.log(data)
-                    this.setState({balance:data.data.balance})
-                }
-                else{
-                    alert("Somethings Wrong")
-                }
 
-            }
-        );
+        fetchUserDetailsApi(this.state.accountNumber).then((data) =>{
+                    this.setState({balance:data.data.balance})
+            }).catch((error) =>{
+            console.log(error)
+        });
     }
 
 

@@ -8,6 +8,8 @@ import Header from "./Components/Header";
 import Profile from "./Components/Profile";
 import Transaction from "./Components/Transaction";
 import Home from "./Components/Home";
+import Transfer from './Components/Transfer';
+import TransactionDetails from "./Components/TransactionDetails";
 
 
 
@@ -34,9 +36,20 @@ function startTransactionView(){
     ReactDOM.render(<Transaction />,document.getElementById('root'));
 }
 
+function startTransferView(){
+    ReactDOM.render(<Header/>,document.getElementById('header'));
+    ReactDOM.render(<Transfer />,document.getElementById('root'));
+}
+function startDetailsView(){
+    ReactDOM.render(<Header/>,document.getElementById('header'));
+    ReactDOM.render(<TransactionDetails/>,document.getElementById('root'));
+}
+
 Page('/', startHomeView)
 Page('/profile',startProfileView)
 Page('/transaction',startTransactionView)
+Page('/transfer',startTransferView)
+Page('/transactionDetails',startDetailsView)
 Page.start()
 
 

@@ -6,16 +6,18 @@ import 'react-toastify/dist/ReactToastify.css';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
-import Button from '@material-ui/core/Button';
+
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import {Button, TextField} from "@material-ui/core";
+
 
 class Transaction extends React.Component{
     constructor() {
         super();
         this.state={
-            accountNumber:"919554630599",
+            accountNumber:window.localStorage.getItem('accountNumber'),
             balance:'',
             mode:'Withdraw'
         }
@@ -53,7 +55,7 @@ class Transaction extends React.Component{
 
                     <Grid container justify="center" >
                         <Grid item >
-                            <Paper style={{height:300,width:500,paddingTop:'30px',background:'#f8f8f8'}}  >
+                            <Paper style={{height:320,width:500,paddingTop:'30px',background:'#f8f8f8'}}  >
                                 <text style={{fontSize:"30px",margin:'80px',fontFamily:'Monospace',color:'#090809'}}>Money Transaction</text>
                                 <br/>
                                 <RadioGroup style={{paddingLeft:'100px', paddingTop:'10px'}} aria-label="mode"  value={this.state.mode}
@@ -62,10 +64,11 @@ class Transaction extends React.Component{
                                     <FormControlLabel value="Deposit" control={<Radio />} label="Deposit" />
 
                                 </RadioGroup>
-                                <input  style={{marginTop:"20px",marginLeft:'90px',paddingLeft:'20px',width: "60%"}} type="text" value={this.state.balance}
-                                        onChange={(e) => this.handleChange({ balance: e.target.value })} />
+                                <TextField id="outlined-basic" variant="outlined" style={{marginTop:"20px",marginLeft:'90px',paddingLeft:'20px',width: "60%"}} type="text" value={this.state.balance}
+                                           onChange={(e) => this.handleChange({ balance: e.target.value })}/>
+
                                 <br/>
-                                <Button  style={{marginTop:"20px",marginLeft:'160px',width:"30%"}} variant="contained" onClick={this.handleClick}>Submit</Button>
+                                <Button  style={{marginTop:"13px",marginLeft:'160px',width:"30%"}} variant="contained" onClick={this.handleClick}>Submit</Button>
                             </Paper>
 
                         </Grid>

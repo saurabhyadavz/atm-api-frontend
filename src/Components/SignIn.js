@@ -1,4 +1,3 @@
-
 import React from "react";
 import '../css/Home.css';
 import {
@@ -8,14 +7,18 @@ import {
     Input,
     Label
 } from 'reactstrap';
+import  {loginUser} from "./Utils";
+import {toast, ToastContainer} from "react-toastify";
+
+
 
 class SignIn extends React.Component {
 
     constructor() {
         super();
         this.state={
-            email:'',
-            password:'',
+            accountNumber:'',
+            pin:'',
 
         }
         this.handleChange=this.handleChange.bind(this)
@@ -25,44 +28,55 @@ class SignIn extends React.Component {
     handleChange(change){
         this.setState(change)
     }
-    handleClick(e){
+   async handleClick(e){
 
-        window.localStorage.setItem('logged','true');
-        console.log(window.localStorage.getItem('logged'))
+       loginUser(this.state.accountNumber).then((data) =>{
+           window.localStorage.setItem('logged','true')
+           window.localStorage.setItem('accountNumber',this.state.accountNumber)
+           window.location='/profile'
+       }).catch((error) =>{
+           toast.error("Wrong ID/PIN")
+           console.log(error)
+       });
 
-        window.location='/profile'
+
 
 
     }
 
-    render() {
+    render()
+    {
 
         return (
-            <div className="Home">
+            <div>
+                <ToastContainer/>
+                <div className="Home">
 
-                <h2>Sign In</h2>
-                <Form className="form">
-                    <FormGroup>
-                        <Label for="exampleEmail">Username</Label>
-                        <Input
-                            type="email"
-                            placeholder="example@example.com"
-                            value={this.state.email}
-                            onChange={(e) => this.handleChange({ email: e.target.value })}
-                        />
-                    </FormGroup>
-                    <FormGroup>
-                        <Label for="examplePassword">Password</Label>
-                        <Input
-                            type="password"
-                            placeholder="........"
-                            value={this.state.password}
-                            onChange={(e) => this.handleChange({ password: e.target.value })}
-                        />
-                    </FormGroup>
-                    <Button onClick={this.handleClick}>Login</Button>
-                </Form>
+                    <h2>Sign In</h2>
+                    <Form className="form">
+                        <FormGroup>
+                            <Label for="exampleEmail">Account Number</Label>
+                            <Input
+                                type="number"
+                                placeholder="Enter your 12 digit account number"
+                                value={this.state.accountNumber}
+                                onChange={(e) => this.handleChange({ accountNumber: e.target.value })}
+                            />
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="examplePassword">Pin</Label>
+                            <Input
+                                type="password"
+                                placeholder="Enter your 4 digit pin"
+                                value={this.state.pin}
+                                onChange={(e) => this.handleChange({ pin: e.target.value })}
+                            />
+                        </FormGroup>
+                        <Button onClick={this.handleClick}>Login</Button>
+                    </Form>
+                </div>
             </div>
+
 
         );
     }

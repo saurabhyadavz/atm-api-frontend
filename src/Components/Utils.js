@@ -1,12 +1,11 @@
 import axios from "axios";
 
-const baseUrl="http://localhost:8080";
+const baseUrl="http://localhost:8081";
 
 export async function fetchUserDetailsApi (accountNumber){
     try{
-        let response= await axios.get(`${baseUrl}/checkBalance?accountNumber=${accountNumber}`)
-        console.log(response);
-        return response;
+        return await axios.get(`${baseUrl}/checkBalance?accountNumber=${accountNumber}`)
+
     }
     catch(error) {
         console.log(error);
@@ -26,15 +25,32 @@ export async function transactionApi (accountNumber,amount,path){
     let response=await axios.put(  `${baseUrl}/${path}`,body,config)
      return response
 }
+export async function transferApi (accountNumber,amount){
 
-export async function signInAuth(email,pass){
+    console.log(window.localStorage.getItem('accountNumber'))
+    console.log(accountNumber);
+    console.log(amount);
+    const body=JSON.stringify({
+        accountNumber:accountNumber,
+        balance:amount
+    });
 
+    const config = { headers: {'Content-Type': 'application/json'} };
+
+   return await axios.put(  `${baseUrl}/transferMoney?accountNumber=${window.localStorage.getItem('accountNumber')}`,body,config)
+
+}
+export async function loginUser(accountNumber){
+
+      return await axios.get(`${baseUrl}/loginUser?accountNumber=${accountNumber}`)
+
+}
+export async function fetchTransactionDetailsApi(accountNumber){
     try{
-        let response= await axios.get(`${baseUrl}/signIn?email=${email}`)
-        console.log(response);
-        return response;
+        return await axios.get(`${baseUrl}/transactionDetails?accountNumber=${accountNumber}`)
+
     }
-    catch(error) {
+    catch(error){
         console.log(error);
         return error;
     }
