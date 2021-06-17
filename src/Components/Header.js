@@ -1,8 +1,8 @@
 import React from "react";
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import Button from 'react-bootstrap/Button';
-
+import 'antd/dist/antd.css';
+import {  Button } from "antd";
 
 function Header(){
     const handleClick=(e)=>{
@@ -16,13 +16,14 @@ function Header(){
                     <Navbar.Brand style={{marginLeft:'10px',fontFamily:'sans-serif'}} >ATM</Navbar.Brand>
                     <Nav className="mr-auto">
                             <Nav.Link  href="/profile" >Profile</Nav.Link>
+                             <Nav.Link  href="/checkBalance" >Check Balance</Nav.Link>
                             <Nav.Link  href="/transaction" >Transaction</Nav.Link>
                             <Nav.Link  href="/transfer" >Money Transfer</Nav.Link>
                              <Nav.Link  href="/transactionDetails" >Transaction Details</Nav.Link>
 
                     </Nav>
 
-                    <Button variant="light" onClick={handleClick}>Logout</Button>
+                    <Button  danger onClick={handleClick}>Logout</Button>
 
                 </Navbar>
 

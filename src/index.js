@@ -10,6 +10,8 @@ import Transaction from "./Components/Transaction";
 import Home from "./Components/Home";
 import Transfer from './Components/Transfer';
 import TransactionDetails from "./Components/TransactionDetails";
+import Balance from "./Components/Balance";
+
 
 
 
@@ -44,9 +46,14 @@ function startDetailsView(){
     ReactDOM.render(<Header/>,document.getElementById('header'));
     ReactDOM.render(<TransactionDetails/>,document.getElementById('root'));
 }
+function startBalanceView(){
+    ReactDOM.render(<Header/>,document.getElementById('header'));
+    ReactDOM.render(<Balance/>,document.getElementById('root'));
+}
 
 Page('/', startHomeView)
 Page('/profile',startProfileView)
+Page('/checkBalance',startBalanceView)
 Page('/transaction',startTransactionView)
 Page('/transfer',startTransferView)
 Page('/transactionDetails',startDetailsView)

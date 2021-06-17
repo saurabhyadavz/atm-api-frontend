@@ -1,8 +1,9 @@
 import React from "react"
 import {fetchUserDetailsApi} from "./Utils.js";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
+import 'antd/dist/antd.css';
+
+import { EditOutlined } from '@ant-design/icons';
+import EditProfile from "./EditProfile";
 
 class Profile extends React.Component{
     constructor() {
@@ -10,55 +11,61 @@ class Profile extends React.Component{
         this.state={
             accountNumber:window.localStorage.getItem('accountNumber'),
             balance:'',
+            aadhaarNo:'',
+            name:'',
+            panNo:'',
+            editMode:false
 
         }
-
+        this.handleClick=this.handleClick.bind(this)
+        this.changeToFalse=this.changeToFalse.bind(this)
+    }
+    handleClick(){
+        this.setState({editMode:true})
     }
 
     componentDidMount() {
 
         fetchUserDetailsApi(this.state.accountNumber).then((data) =>{
+                    console.log(data)
                     this.setState({balance:data.data.balance})
+                    this.setState({aadhaarNo:data.data.aadhaarNo})
+                    this.setState({name:data.data.name})
+                    this.setState({panNo:data.data.panNo})
+                    window.localStorage.setItem('balance',data.data.balance)
             }).catch((error) =>{
             console.log(error)
         });
     }
 
+    changeToFalse(){
+        this.setState({editMode:false})
+    }
 
 
     render()
     {
-        let page=<Container style={{paddingTop:40}}>
+        var view=(this.state.editMode?<div><EditProfile changeToFalse={this.changeToFalse}/></div>: <div style={{display:'flex',borderStyle:'dotted',
+            marginRight:"70vw",marginTop:'10px',marginLeft:5}}>
+            <div style={{borderTop:"1px solid lightgrey", fontSize:20}}>
+                <p>Account Number: {this.state.accountNumber}</p>
+                <p>Name : {this.state.name}</p>
+                <p>Aadhaar No : {this.state.aadhaarNo}</p>
+                <p>PAN No: {this.state.panNo}</p>
+            </div>
 
-            <Grid container spacing={4} justify="center" >
-                <Grid item xs >
-                    <Paper style={{height:200,width:400,textAlign:'center',paddingTop:'50px',background:'#f8f8f8'}}  >
-                        <text style={{fontSize:"30px",fontFamily:'Monospace',color:'#090809'}}>Account Number</text>
-                        <br/>
-                        <text style={{fontSize:"30px",fontFamily:'Monospace' ,color:'#090809'}}>{this.state.accountNumber}</text>
+            <div style={{cursor:"pointer",marginLeft:240}}>
+                <EditOutlined style={{fontSize:'30px'}} onClick={this.handleClick}/>
+            </div>
 
-                    </Paper>
-
-                </Grid>
-                <Grid item xs>
-                    <Paper style={{height:200,width:400,textAlign:'center',paddingTop:'50px',background:'#f8f8f8'}}  >
-                        <text style={{fontSize:"30px",fontFamily:'Monospace',color:'#090809'}}>Total Balance</text>
-                        <br/>
-                        <text style={{fontSize:"30px",fontFamily:'Monospace',color:'#090809'}}>₹ {this.state.balance}</text>
-
-                    </Paper>
-                </Grid>
-
-
-            </Grid>
-
-        </Container>;
-
+        </div>);
 
         return (
             <div>
-                {page}
+                {view}
             </div>
+
+
 
 
         );

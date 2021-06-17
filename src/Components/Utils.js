@@ -56,3 +56,18 @@ export async function fetchTransactionDetailsApi(accountNumber){
     }
 
 }
+
+export async function updateProfile(name,aaddhar,pan){
+    const body=JSON.stringify({
+        accountNumber:window.localStorage.getItem('accountNumber'),
+        aadhaarNo:aaddhar,
+        name:name,
+        panNo:pan,
+    });
+
+    const config = { headers: {'Content-Type': 'application/json'} };
+
+    let response=await axios.put(  `${baseUrl}/updateProfile`,body,config)
+    return response
+
+}
